@@ -5,7 +5,7 @@ from rest_framework import permissions
 
 from product import serializer
 from . import serializers 
-from . send_email import send_confirmation_email, send_reset_password
+from .send_email import send_confirmation_email, send_reset_password, send_html_email
 from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.views import TokenObtainPairView
 from shop_api.tasks import send_email_task
@@ -83,6 +83,7 @@ class FollowSpamApi(APIView):
         serializer = serializers.SpamViewSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
+        send_html_email()
         return Response('Followed to spam!', status=200)
 
 

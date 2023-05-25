@@ -23,3 +23,4 @@ class ProductDetailSerializer(serializers.ModelSerializer):
         repr['raviews'] = instance.reviews.count()
         
         return repr
+
